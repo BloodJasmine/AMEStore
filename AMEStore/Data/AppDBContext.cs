@@ -7,11 +7,11 @@ namespace AMEStore.Data
     {
         public AppDBContext(DbContextOptions<AppDBContext> options) : base(options)
         {
-
+            Database.EnsureCreated();
         }
         public DbSet<Product> Product { get; set; }
         public DbSet<Category> Category { get; set; }
-        public DbSet<StoreCartItem> StoreCartItem {get;set;}
+        public DbSet<StoreCartItem> StoreCartItem {get;set;}2
         public DbSet<Order> Order { get; set; }
         public DbSet<OrderDetail> OrderDetail { get; set; }
     }

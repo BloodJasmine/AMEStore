@@ -1,10 +1,6 @@
 ﻿using AMEStore.Data.Models;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace AMEStore.Data
 {
@@ -12,8 +8,6 @@ namespace AMEStore.Data
     {
         public static void Initial(AppDBContext context) 
         {
-            
-           
             if (!context.Category.Any())
             {
                 context.Category.AddRange(Categories.Select(c => c.Value));

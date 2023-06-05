@@ -2,6 +2,7 @@
 using AMEStore.Data.Models;
 using AMEStore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace AMEStore.Controllers
             _AllCategories = iCategories;
             _AllProducts = iProducts;
         }
+        
         [Route("Products/List")]
         [Route("Products/List/{category}")]
         public ViewResult List(string category)
@@ -25,30 +27,25 @@ namespace AMEStore.Controllers
             string _category = category;
             IEnumerable<Product> products = null;
             string currCategory = "";
-
-            if (string.IsNullOrEmpty(category))
+            
+            switch (category)
             {
-                products = _AllProducts.AllProducts.OrderBy(i => i.Id);
-                ViewBag.Title = "Все товары";
-            }
-            else 
-            {
-                if (string.Equals("figure", category, StringComparison.OrdinalIgnoreCase))
-                {
+                case "figure":
                     products = _AllProducts.AllProducts.Where(i => i.Category.CategoryName.Equals("Фигурки")).OrderBy(i => i.Id);
                     currCategory = "Фигурки";
-                }
-                else if (string.Equals("dakimakura", category, StringComparison.OrdinalIgnoreCase))
-                {
+                    break;
+                case "dakimakura":
                     products = _AllProducts.AllProducts.Where(i => i.Category.CategoryName.Equals("Дакимакуры")).OrderBy(i => i.Id);
                     currCategory = "Дакимакуры";
-                }
-                else if(string.Equals("clothes", category, StringComparison.OrdinalIgnoreCase))
-                {
+                    break;
+                case "cosplay":
                     products = _AllProducts.AllProducts.Where(i => i.Category.CategoryName.Equals("Одежда")).OrderBy(i => i.Id);
-                    currCategory = "Одежда";
-                }
-                ViewBag.Title = currCategory;
+                    currCategory = "Косплей";
+                    break;
+                default:
+                    products = _AllProducts.AllProducts.OrderBy(i => i.Id);
+                    ViewBag.Title = "Все товары";
+                    break;
             }
 
             var prodObj = new ProductsListViewModel

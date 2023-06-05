@@ -2,18 +2,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AMEStore.Data.Interfaces;
-using AMEStore.Data.Mocks;
 using Microsoft.Extensions.Configuration;
 using AMEStore.Data;
 using Microsoft.EntityFrameworkCore;
 using AMEStore.Data.Repository;
 using AMEStore.Data.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace AMEStore
 {
@@ -64,7 +58,7 @@ namespace AMEStore
                 (
                     name: "categoryFilter",
                     template: "Product/{action}/{category?}",
-                    defaults: new { Controller = "Product", action = "List" }
+                    defaults: new { Controller = "Product", action = "List",  }
                 );
             });
            
